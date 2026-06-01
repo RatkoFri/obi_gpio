@@ -1,0 +1,4 @@
+*.out
+*.vcd
+OBI_slave_gpio_tb.sv
+simulate.sh
