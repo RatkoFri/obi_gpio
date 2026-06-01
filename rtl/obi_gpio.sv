@@ -11,7 +11,6 @@ module obi_gpio #(
     output  logic                     obi_agnt_o,
     input   logic [ADDR_WIDTH-1:0]    obi_aaddr_i,
     input   logic [DATA_WIDTH-1:0]    obi_awdata_i,
-    input   logic [DATA_WIDTH/8-1:0]  obi_byteen_i, // Byte-enable signals for partial writes
 
     input   logic                     obi_awe_i,
     input   logic [DATA_WIDTH/8-1:0]  obi_abe_i,
@@ -97,7 +96,7 @@ module obi_gpio #(
     
     assign wr_en = state == RESP & obi_awe_i & (obi_aaddr_i[6:0] == GpoRegOffset); // Needs to ensure write request is valid and handshake occured in address phase
 
-    assign write_data_mask = {{8{obi_byteen_i[3]}},{8{obi_byteen_i[2]}},{8{obi_byteen_i[1]}},{8{obi_byteen_i[0]}}}; 
+    assign write_data_mask = {{8{obi_abe_i[3]}},{8{obi_abe_i[2]}},{8{obi_abe_i[1]}},{8{obi_abe_i[0]}}}; 
 
 
     register  #(
