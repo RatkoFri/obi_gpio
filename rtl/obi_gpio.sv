@@ -132,7 +132,7 @@ module obi_gpio #(
     always_comb begin 
         obi_rdata_o = '0; // Default to zero
         if(rd_en) begin
-            case(obi_aaddr_i)
+            case(obi_aaddr_i[6:0])
                 GpoRegOffset: obi_rdata_o = {{(DATA_WIDTH-NUM_OUT){1'b0}}, gpio_out_o}; // Zero-extend GPO
                 GpiRegOffset: obi_rdata_o = {{(DATA_WIDTH-NUM_IN){1'b0}}, gpio_in};  // Zero-extend GPI
                 default: obi_rdata_o = '0; // Default to zero for unmapped addresses
@@ -147,7 +147,7 @@ module obi_gpio #(
     always_comb begin 
         obi_rerr_o = 1'b0; // Default to no error
         if (state == RESP) begin // Only check for read errors during response phase for read transactions
-            case(obi_aaddr_i)
+            case(obi_aaddr_i[6:0])
                 GpoRegOffset, GpiRegOffset: obi_rerr_o = 1'b0; // Valid addresses
                 default: obi_rerr_o = 1'b1; // Invalid address
             endcase
@@ -156,23 +156,27 @@ module obi_gpio #(
 
 endmodule
 
-module register
-#(
-    parameter type DTYPE = logic,
-    parameter DTYPE RESET_VALUE = 0
-)
-(
-    input  logic clk,
-    input  logic rstn,
-    input  logic ce,   // clock-enable
-    input  DTYPE in,
-    output DTYPE out
-);
-
-    always_ff @(posedge clk) begin
-        if (~rstn)
-            out <= RESET_VALUE;
-        else if (ce)
-            out <= in;
-    end
-endmodule
+// -----------------------------------------------------------------------------
+// obi_gpio instantiation template
+// -----------------------------------------------------------------------------
+// obi_gpio #(
+//     .ADDR_WIDTH(32),
+//     .DATA_WIDTH(32),
+//     .NUM_IN(8),
+//     .NUM_OUT(8)
+// ) u_obi_gpio (
+//     .clk_i       (clk_i),
+//     .rstn_i      (rstn_i),
+//     .obi_areq_i  (obi_areq_i),
+//     .obi_agnt_o  (obi_agnt_o),
+//     .obi_aaddr_i (obi_aaddr_i),
+//     .obi_awdata_i(obi_awdata_i),
+//     .obi_awe_i   (obi_awe_i),
+//     .obi_abe_i   (obi_abe_i),
+//     .obi_rvalid_o(obi_rvalid_o),
+//     .obi_rready_i(obi_rready_i),
+//     .obi_rdata_o (obi_rdata_o),
+//     .obi_rerr_o  (obi_rerr_o),
+//     .gpio_in_i   (gpio_in_i),
+//     .gpio_out_o  (gpio_out_o)
+// );
