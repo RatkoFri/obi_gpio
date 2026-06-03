@@ -51,7 +51,7 @@ module obi_gpio #(
 
     // Read interface signals
     logic rd_en;
-
+    logic [DATA_WIDTH-1:0] read_data_mux;
 
 
     // BEGIN: OBI wrapper
@@ -114,7 +114,7 @@ module obi_gpio #(
     // END: OBI write interface
 
     // BEGIN: OBI read interface
-    assign rd_en = state == RESP & !obi_awe_i ; 
+    assign rd_en = state == ADDR & !obi_awe_i ; 
 
     register  #(
         .DTYPE(logic [NUM_IN-1:0]),
@@ -130,16 +130,28 @@ module obi_gpio #(
 
 
     always_comb begin 
-        obi_rdata_o = '0; // Default to zero
+        read_data_mux = '0; // Default to zero
         if(rd_en) begin
             case(obi_aaddr_i[6:0])
-                GpoRegOffset: obi_rdata_o = {{(DATA_WIDTH-NUM_OUT){1'b0}}, gpio_out_o}; // Zero-extend GPO
-                GpiRegOffset: obi_rdata_o = {{(DATA_WIDTH-NUM_IN){1'b0}}, gpio_in};  // Zero-extend GPI
-                default: obi_rdata_o = '0; // Default to zero for unmapped addresses
+                GpoRegOffset: read_data_mux = {{(DATA_WIDTH-NUM_OUT){1'b0}}, gpio_out_o}; // Zero-extend GPO
+                GpiRegOffset: read_data_mux = {{(DATA_WIDTH-NUM_IN){1'b0}}, gpio_in};  // Zero-extend GPI
+                default: read_data_mux = '0; // Default to zero for unmapped addresses
             endcase
         end
     end
 
+    // register to hold the read data during response phase, so that it can be output when rvalid is high
+    register  #(
+        .DTYPE(logic [DATA_WIDTH-1:0]),
+        .RESET_VALUE('0)     
+    ) obi_read_data_reg
+        (
+        .clk(clk_i),
+        .rstn(rstn_i),
+        .ce(obi_a_fire), // Capture read data when read enable is high
+        .in(read_data_mux),
+        .out(obi_rdata_o)
+    );
 
     // END: logic for OBI read interface
 

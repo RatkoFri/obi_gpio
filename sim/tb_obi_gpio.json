@@ -1,21 +1,21 @@
 {
   "extensionVersion": "1.5.3",
   "fileName": "c:\\Users\\ratko\\Documents\\RVJ1\\obi_gpio\\sim\\tb_obi_gpio.vcd",
-  "markerTime": 187,
+  "markerTime": 1148,
   "altMarkerTime": null,
   "displayTimeUnit": "ps",
   "selectedSignal": {
-    "name": "tb_obi_gpio.dut.obi_agnt_o",
-    "msb": -1,
-    "lsb": -1
+    "name": "tb_obi_gpio.switches",
+    "msb": 15,
+    "lsb": 0
   },
   "zoomRatio": 0.3526470588235294,
-  "scrollLeft": 0,
+  "scrollLeft": 51,
   "defaultPixelTime": 1000,
   "displayedSignals": [
     {
       "dataType": "netlist-variable",
-      "netlistId": 33,
+      "netlistId": 31,
       "name": "tb_obi_gpio.dut.rstn_i",
       "numberFormat": "binary",
       "colorIndex": 0,
@@ -41,7 +41,7 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 38,
+      "netlistId": 37,
       "name": "tb_obi_gpio.dut.gpio_in",
       "numberFormat": "hexadecimal",
       "colorIndex": 0,
@@ -54,7 +54,7 @@
     },
     {
       "dataType": "netlist-variable",
-      "netlistId": 37,
+      "netlistId": 36,
       "name": "tb_obi_gpio.dut.gpio_out_o",
       "numberFormat": "hexadecimal",
       "colorIndex": 0,
@@ -98,19 +98,6 @@
         },
         {
           "dataType": "netlist-variable",
-          "netlistId": 27,
-          "name": "tb_obi_gpio.dut.obi_byteen_i",
-          "numberFormat": "hexadecimal",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "fullPath",
-          "customName": "obi_byteen_i",
-          "renderType": "multiBit",
-          "valueLinkEnable": false
-        },
-        {
-          "dataType": "netlist-variable",
           "netlistId": 23,
           "name": "tb_obi_gpio.dut.obi_agnt_o",
           "numberFormat": "binary",
@@ -134,21 +121,34 @@
           "customName": "obi_areq_i",
           "renderType": "binary",
           "valueLinkEnable": false
-        },
-        {
-          "dataType": "netlist-variable",
-          "netlistId": 26,
-          "name": "tb_obi_gpio.dut.obi_awe_i",
-          "numberFormat": "binary",
-          "colorIndex": 0,
-          "rowHeight": 1,
-          "verticalScale": 1,
-          "nameType": "fullPath",
-          "customName": "obi_awe_i",
-          "renderType": "binary",
-          "valueLinkEnable": false
         }
       ]
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 22,
+      "name": "tb_obi_gpio.dut.obi_abe_i",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "obi_abe_i",
+      "renderType": "multiBit",
+      "valueLinkEnable": false
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 26,
+      "name": "tb_obi_gpio.dut.obi_awe_i",
+      "numberFormat": "binary",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "obi_awe_i",
+      "renderType": "binary",
+      "valueLinkEnable": false
     },
     {
       "dataType": "signal-group",
@@ -157,7 +157,7 @@
       "children": [
         {
           "dataType": "netlist-variable",
-          "netlistId": 30,
+          "netlistId": 28,
           "name": "tb_obi_gpio.dut.obi_rready_i",
           "numberFormat": "binary",
           "colorIndex": 0,
@@ -170,7 +170,7 @@
         },
         {
           "dataType": "netlist-variable",
-          "netlistId": 31,
+          "netlistId": 29,
           "name": "tb_obi_gpio.dut.obi_rvalid_o",
           "numberFormat": "binary",
           "colorIndex": 0,
@@ -183,7 +183,7 @@
         },
         {
           "dataType": "netlist-variable",
-          "netlistId": 29,
+          "netlistId": 45,
           "name": "tb_obi_gpio.dut.obi_rerr_o",
           "numberFormat": "binary",
           "colorIndex": 0,
@@ -196,7 +196,7 @@
         },
         {
           "dataType": "netlist-variable",
-          "netlistId": 46,
+          "netlistId": 35,
           "name": "tb_obi_gpio.dut.obi_rdata_o",
           "numberFormat": "hexadecimal",
           "colorIndex": 0,
@@ -212,11 +212,11 @@
     {
       "dataType": "signal-group",
       "groupName": "FSM",
-      "collapseState": 2,
+      "collapseState": 1,
       "children": [
         {
           "dataType": "netlist-variable",
-          "netlistId": 36,
+          "netlistId": 34,
           "name": "tb_obi_gpio.dut.state",
           "numberFormat": "binary",
           "colorIndex": 0,
@@ -228,6 +228,19 @@
           "valueLinkEnable": false
         }
       ]
+    },
+    {
+      "dataType": "netlist-variable",
+      "netlistId": 17,
+      "name": "tb_obi_gpio.switches",
+      "numberFormat": "hexadecimal",
+      "colorIndex": 0,
+      "rowHeight": 1,
+      "verticalScale": 1,
+      "nameType": "fullPath",
+      "customName": "switches",
+      "renderType": "multiBit",
+      "valueLinkEnable": false
     }
   ]
 }
